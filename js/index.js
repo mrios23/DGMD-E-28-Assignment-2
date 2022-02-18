@@ -1,8 +1,9 @@
+var symbolTracker = true;
+var isGameOver = false;
+
 window.onload = function() {
 
     const playGameBtn = document.getElementById("play-game-btn");
-    var symbolTracker = true;
-    var isGameOver = false;
 
     playGameBtn.addEventListener("click", () => {
 
@@ -53,6 +54,7 @@ window.onload = function() {
             });
         }
     });
+}
 
     // function to mark cell with X or 0
     function markCell(cell) {
@@ -81,9 +83,6 @@ window.onload = function() {
         }
     }
 
-
     function checkMatches(){
         // check the adjoining cells innerHTML contents to see if the symbols match
     }
-
-}

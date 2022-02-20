@@ -74,8 +74,6 @@ window.onload = function() {
 
     // function to mark cell with X or 0
     function markCell(cell) {
-        // let id = cell.id;
-        // console.log("you clicked this specific grid item " + id);
 
         // TODO: add check to see if box is already occupied so it doesn't overwrite it
         cell.innerHTML = (symbolTracker) ? "X" : "O";
@@ -101,40 +99,20 @@ window.onload = function() {
 
      // function that cheks if the adjoining cells innerText contents to see if the symbols match
     function checkMatches(){
-
-        /*
-            Matches Wins
-            across:
-                [0_0, 1_0, 2_0]
-                [0_1, 1_1, 2_1]
-                [0_2, 1_2, 2_2]
-            diagonal:
-                [0_0, 1_1, 2_2]
-                [2_0, 1_1, 0_2]
-            horizontal:
-                [0_0, 0_1, 0_2]
-                [1_0, 1_1, 1_2]
-                [2_0, 2_1, 2_2]
-        */
-
-
-        // console.table(matches);
-
         for(index in matches){
-            // ["0_0", "1_0", "2_0"]
         
             let match = matches[index];
 
             let[first, second, third] = match;
 
-            let cell1 = document.getElementById(first);
-            let cell2 = document.getElementById(second);
-            let cell3 = document.getElementById(third);        
+            let cell1 = document.getElementById(first).innerHTML;
+            let cell2 = document.getElementById(second).innerHTML;
+            let cell3 = document.getElementById(third).innerHTML;     
             
-            if((cell1.innerHTML === cell2.innerHTML) && (cell1.innerHTML === cell3.innerHTML)){
-                isGameOver = true;
-                console.log("Game over");
-                break;
+            if((cell1 != "Empty") && (cell1 === cell2) && (cell1 === cell3)){
+                    isGameOver = true;
+                    
+                    break;
             }
         }
     }

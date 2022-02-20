@@ -1,6 +1,18 @@
 var symbolTracker = true;
 var isGameOver = false;
 
+// define all winning combinations
+const matches = [
+    ["0_0", "1_0", "2_0"],
+    ["0_1", "1_1", "2_1"],
+    ["0_2", "1_2", "2_2"],
+    ["0_0", "1_1", "2_2"],
+    ["2_0", "1_1", "0_2"],
+    ["0_0", "0_1", "0_2"],
+    ["1_0", "1_1", "1_2"],
+    ["2_0", "2_1", "2_2"]
+]
+
 window.onload = function() {
 
     const playGameBtn = document.getElementById("play-game-btn");
@@ -25,7 +37,8 @@ window.onload = function() {
                     cell.setAttribute("id", r + "_" + c)
                     
                     // debug info
-                    cell.innerHTML = "Empty";
+                    // cell.innerHTML = "Empty";
+                    cell.innerHTML = cell.id;
 
                     // add click event listener to new cell
                     cell.addEventListener("click", (event) =>{
@@ -52,14 +65,17 @@ window.onload = function() {
             gridItems.forEach((cell) => {
                 cell.innerHTML = "Empty";
             });
+            isGameOver = false;
         }
     });
 }
 
+// UTILITY FUNCTIONS - supports methods called within window.onload
+
     // function to mark cell with X or 0
     function markCell(cell) {
-        let id = cell.id;
-        console.log("you clicked this specific grid item " + id);
+        // let id = cell.id;
+        // console.log("you clicked this specific grid item " + id);
 
         // TODO: add check to see if box is already occupied so it doesn't overwrite it
         cell.innerHTML = (symbolTracker) ? "X" : "O";
@@ -73,16 +89,52 @@ window.onload = function() {
         // check the adjoining cells innerHTML contents to see if the symbols match
         checkMatches();
 
-        // if game isn't over
         if(!isGameOver){
             // if game isn't over change symbol
             symbolTracker = !symbolTracker;
-            console.log(isGameOver);
+            console.log("The game isn't over! isGameOver returns " + isGameOver);
         }else{
-            alert("Game over!")
+            // game is over
+            alert("Congrats! The game is over!");
         }
     }
 
+     // function that cheks if the adjoining cells innerText contents to see if the symbols match
     function checkMatches(){
-        // check the adjoining cells innerHTML contents to see if the symbols match
+
+        /*
+            Matches Wins
+            across:
+                [0_0, 1_0, 2_0]
+                [0_1, 1_1, 2_1]
+                [0_2, 1_2, 2_2]
+            diagonal:
+                [0_0, 1_1, 2_2]
+                [2_0, 1_1, 0_2]
+            horizontal:
+                [0_0, 0_1, 0_2]
+                [1_0, 1_1, 1_2]
+                [2_0, 2_1, 2_2]
+        */
+
+
+        // console.table(matches);
+
+        for(index in matches){
+            // ["0_0", "1_0", "2_0"]
+        
+            let match = matches[index];
+
+            let[first, second, third] = match;
+
+            let cell1 = document.getElementById(first);
+            let cell2 = document.getElementById(second);
+            let cell3 = document.getElementById(third);        
+            
+            if((cell1.innerHTML === cell2.innerHTML) && (cell1.innerHTML === cell3.innerHTML)){
+                isGameOver = true;
+                console.log("Game over");
+                break;
+            }
+        }
     }

@@ -43,6 +43,7 @@ window.onload = function() {
                     // add click event listener to new cell
                     cell.addEventListener("click", (event) =>{
                         markCell(event.target);
+                        updatePlayerMsg();
                     });
 
                     // append cell to column
@@ -51,6 +52,9 @@ window.onload = function() {
                 
                 // append column to grid
                 grid.appendChild(row);
+
+                // update player msg
+                updatePlayerMsg();
 
                 // change game button to reset
                 playGameBtn.innerHTML = "Reset";
@@ -115,4 +119,12 @@ window.onload = function() {
                     break;
             }
         }
+    }
+
+    function updatePlayerMsg() {
+        let playerDiv = document.getElementById("players-turn");
+
+        let currSymbol = ((symbolTracker) ? "X" : "O");
+
+        playerDiv.innerHTML = "Player " + currSymbol + " turn.";
     }

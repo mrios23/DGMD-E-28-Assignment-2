@@ -21,3 +21,8 @@ body {
 .row{
     display: inline-block;
 }
+
+#players-turn{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: x-large;
+}

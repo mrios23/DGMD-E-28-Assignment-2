@@ -37,8 +37,8 @@ window.onload = function() {
                     cell.setAttribute("id", r + "_" + c)
                     
                     // debug info
-                    // cell.innerHTML = "Empty";
-                    cell.innerHTML = cell.id;
+                    cell.innerHTML = "Empty";
+                    // cell.innerHTML = cell.id;
 
                     // add click event listener to new cell
                     cell.addEventListener("click", (event) =>{
@@ -91,13 +91,25 @@ window.onload = function() {
         // check the adjoining cells innerHTML contents to see if the symbols match
         checkMatches();
 
-        if(!isGameOver){
-            // if game isn't over change symbol
+        // check for stalemate
+        let isStaleMate = checkStaleMate();
+
+        if(!isGameOver && !isStaleMate){
+            // game isn't over
             symbolTracker = !symbolTracker;
-            console.log("The game isn't over! isGameOver returns " + isGameOver);
+            
         }else{
             // game is over
-            alert("Congrats! The game is over!");
+            // if winner - congratulate winner
+            if(isGameOver == true){
+                let currSymbol = ((symbolTracker) ? "X" : "O");
+                alert("Winner! Congratulations Player " + currSymbol);
+            } 
+
+            // if stalemate - announce stalemate
+            if(isStaleMate == true){
+                alert("Game Over! No winners");
+            }
         }
     }
 
@@ -115,10 +127,23 @@ window.onload = function() {
             
             if((cell1 != "Empty") && (cell1 === cell2) && (cell1 === cell3)){
                     isGameOver = true;
-                    
                     break;
             }
         }
+    }
+
+    function checkStaleMate(){
+
+        let staleMateFlag = true;
+        let gridItems = document.querySelectorAll(".cell");
+
+        gridItems.forEach((cell)=>{
+            if(cell.innerHTML == "Empty"){
+                staleMateFlag = false;
+            }
+        });
+
+        return staleMateFlag;
     }
 
     function updatePlayerMsg() {

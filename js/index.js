@@ -77,7 +77,7 @@ function markCell(cell) {
 
     // Check that the game isn't over & the cell isn't already occupied
     if(cell.innerHTML == "" && isGameOver != true){
-        cell.innerHTML = (symbolTracker) ? "X" : "O";
+        cell.innerHTML = getCurrSymbol();
         symbolTracker = !symbolTracker;
     }else{
         alert("Please pick another box or reset the game!");
@@ -144,8 +144,9 @@ function checkStaleMate(){
 
 function updatePlayerMsg() {
     let playerDiv = document.getElementById("players-turn");
+    playerDiv.innerHTML = "Player " + getCurrSymbol() + " turn.";
+}
 
-    let currSymbol = ((symbolTracker) ? "X" : "O");
-
-    playerDiv.innerHTML = "Player " + currSymbol + " turn.";
+function getCurrSymbol(){
+    return (symbolTracker) ? "X" : "O";
 }

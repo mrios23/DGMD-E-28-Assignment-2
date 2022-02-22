@@ -1,5 +1,6 @@
 var symbolTracker = true;
 var isGameOver = false;
+var winner; 
 
 // winning combinations
 const matches = [
@@ -73,31 +74,30 @@ window.onload = function() {
 // function to mark cell with X or 0
 function markCell(cell) {
 
-    // TODO: add check to see if box is already occupied so it doesn't overwrite it
-    cell.innerHTML = (symbolTracker) ? "X" : "O";
+    // Check that the game isn't over & the cell isn't already occupied
+    if(cell.innerHTML == "" && isGameOver != true){
+        cell.innerHTML = (symbolTracker) ? "X" : "O";
+        symbolTracker = !symbolTracker;
+    }else{
+        alert("Please pick another box or reset the game!");
+    }
 
-    // check if game is over
+    // after marking check if game is over
     checkGameStatus();
 }
 
 // function to check if game is over
 function checkGameStatus(){
-    // check the adjoining cells innerHTML contents to see if the symbols match
+    // check for winner
     checkMatches();
 
     // check for stalemate
     let isStaleMate = checkStaleMate();
 
-    if(!isGameOver && !isStaleMate){
-        // game isn't over
-        symbolTracker = !symbolTracker;
-        
-    }else{
-        // game is over
+    if(isGameOver || isStaleMate){
         // if winner - congratulate winner
         if(isGameOver == true){
-            let currSymbol = ((symbolTracker) ? "X" : "O");
-            alert("Winner! Congratulations Player " + currSymbol);
+            alert("Winner! Congratulations Player " + winner);
         } 
 
         // if stalemate - announce stalemate
@@ -107,7 +107,7 @@ function checkGameStatus(){
     }
 }
 
-// function that cheks if the adjoining cells innerText contents to see if the symbols match
+// function that checks if the adjoining cells innerText contents to see if the symbols match
 function checkMatches(){
     for(index in matches){
     
@@ -120,8 +120,9 @@ function checkMatches(){
         let cell3 = document.getElementById(third).innerHTML;     
         
         if((cell1 != "") && (cell1 === cell2) && (cell1 === cell3)){
-                isGameOver = true;
-                break;
+            isGameOver = true;
+            winner = cell1;
+            break;
         }
     }
 }

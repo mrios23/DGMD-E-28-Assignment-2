@@ -1,5 +1,7 @@
+/* Global Variables */
 var symbolTracker = true;
 var isGameOver = false;
+var isStaleMate = false;
 var winner; 
 
 // winning combinations
@@ -92,7 +94,7 @@ function checkGameStatus(){
     checkMatches();
 
     // check for stalemate
-    let isStaleMate = checkStaleMate();
+    checkStaleMate()
 
     if(isGameOver || isStaleMate){
         // if winner - congratulate winner
@@ -138,7 +140,7 @@ function checkStaleMate(){
         }
     });
 
-    return staleMateFlag;
+    isStaleMate = staleMateflag;
 }
 
 function updatePlayerMsg() {

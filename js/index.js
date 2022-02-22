@@ -34,11 +34,7 @@ window.onload = function() {
                     // create new cell element, add class, & id attributes
                     let cell = document.createElement("div");
                     cell.classList.add("cell");
-                    cell.setAttribute("id", r + "_" + c)
-                    
-                    // debug info
-                    cell.innerHTML = "Empty";
-                    // cell.innerHTML = cell.id;
+                    cell.setAttribute("id", r + "_" + c);
 
                     // add click event listener to new cell
                     cell.addEventListener("click", (event) =>{
@@ -61,13 +57,11 @@ window.onload = function() {
             }
             
         } else{
-            /* reset board
-                    get all elements with cell class
-                    set each cell element's inner text to empty */
+            /* reset board */
             let gridItems = document.querySelectorAll(".cell");
 
             gridItems.forEach((cell) => {
-                cell.innerHTML = "Empty";
+                cell.innerHTML = "";
             });
             isGameOver = false;
         }
@@ -125,7 +119,7 @@ window.onload = function() {
             let cell2 = document.getElementById(second).innerHTML;
             let cell3 = document.getElementById(third).innerHTML;     
             
-            if((cell1 != "Empty") && (cell1 === cell2) && (cell1 === cell3)){
+            if((cell1 != "") && (cell1 === cell2) && (cell1 === cell3)){
                     isGameOver = true;
                     break;
             }
@@ -138,7 +132,7 @@ window.onload = function() {
         let gridItems = document.querySelectorAll(".cell");
 
         gridItems.forEach((cell)=>{
-            if(cell.innerHTML == "Empty"){
+            if(cell.innerHTML == "Empty" || cell.innerHTML == ""){
                 staleMateFlag = false;
             }
         });

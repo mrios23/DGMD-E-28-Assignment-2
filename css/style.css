@@ -7,7 +7,7 @@ body {
     width: 100px;
     height: 100px;
     border: 1px solid black;
-   
+    
 }
 
 #grid{
@@ -15,14 +15,18 @@ body {
     width: 400px;
     height: 400px;
     align-items: center;
-    overflow: auto;
 }
 
 .row{
     display: inline-block;
+    vertical-align: top;
 }
 
 #players-turn{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: x-large;
+}
+
+#play-game-btn{
+    margin-bottom: 25px;
 }

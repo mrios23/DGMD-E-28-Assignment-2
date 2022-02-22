@@ -1,8 +1,7 @@
 /* Global Variables */
 var symbolTracker = true;
 var isGameOver = false;
-var isStaleMate = false;
-var winner; 
+var winner;
 
 // winning combinations
 const matches = [
@@ -94,7 +93,7 @@ function checkGameStatus(){
     checkMatches();
 
     // check for stalemate
-    checkStaleMate()
+    let isStaleMate = checkStaleMate();
 
     if(isGameOver || isStaleMate){
         // if winner - congratulate winner
@@ -103,7 +102,7 @@ function checkGameStatus(){
         } 
 
         // if stalemate - announce stalemate
-        if(isStaleMate == true){
+        if(isStaleMate == true && isGameOver == false){
             alert("Game Over! No winners");
         }
     }
@@ -140,7 +139,7 @@ function checkStaleMate(){
         }
     });
 
-    isStaleMate = staleMateflag;
+    return staleMateFlag;
 }
 
 function updatePlayerMsg() {

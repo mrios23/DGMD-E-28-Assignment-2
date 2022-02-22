@@ -17,7 +17,7 @@ body {
     align-items: center;
 }
 
-.row{
+.col{
     display: inline-block;
     vertical-align: top;
 }

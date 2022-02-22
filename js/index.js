@@ -1,7 +1,7 @@
 var symbolTracker = true;
 var isGameOver = false;
 
-// define all winning combinations
+// winning combinations
 const matches = [
     ["0_0", "1_0", "2_0"],
     ["0_1", "1_1", "2_1"],
@@ -25,8 +25,8 @@ window.onload = function() {
 
             // create 3 columns
             for(let r=0; r<3; r++){
-                let row = document.createElement("div");
-                row.classList.add("row");
+                let col = document.createElement("div");
+                col.classList.add("col");
                 
                 // within each column create 3 cells
                 for(let c=0; c<3; c++){
@@ -43,11 +43,11 @@ window.onload = function() {
                     });
 
                     // append cell to column
-                    row.appendChild(cell);
+                    col.appendChild(cell);
                 }
                 
                 // append column to grid
-                grid.appendChild(row);
+                grid.appendChild(col);
 
                 // update player msg
                 updatePlayerMsg();
@@ -70,80 +70,80 @@ window.onload = function() {
 
 // UTILITY FUNCTIONS - supports methods called within window.onload
 
-    // function to mark cell with X or 0
-    function markCell(cell) {
+// function to mark cell with X or 0
+function markCell(cell) {
 
-        // TODO: add check to see if box is already occupied so it doesn't overwrite it
-        cell.innerHTML = (symbolTracker) ? "X" : "O";
+    // TODO: add check to see if box is already occupied so it doesn't overwrite it
+    cell.innerHTML = (symbolTracker) ? "X" : "O";
 
-        // check if game is over
-        checkGameStatus();
-    }
+    // check if game is over
+    checkGameStatus();
+}
 
-    // function to check if game is over
-    function checkGameStatus(){
-        // check the adjoining cells innerHTML contents to see if the symbols match
-        checkMatches();
+// function to check if game is over
+function checkGameStatus(){
+    // check the adjoining cells innerHTML contents to see if the symbols match
+    checkMatches();
 
-        // check for stalemate
-        let isStaleMate = checkStaleMate();
+    // check for stalemate
+    let isStaleMate = checkStaleMate();
 
-        if(!isGameOver && !isStaleMate){
-            // game isn't over
-            symbolTracker = !symbolTracker;
-            
-        }else{
-            // game is over
-            // if winner - congratulate winner
-            if(isGameOver == true){
-                let currSymbol = ((symbolTracker) ? "X" : "O");
-                alert("Winner! Congratulations Player " + currSymbol);
-            } 
-
-            // if stalemate - announce stalemate
-            if(isStaleMate == true){
-                alert("Game Over! No winners");
-            }
-        }
-    }
-
-     // function that cheks if the adjoining cells innerText contents to see if the symbols match
-    function checkMatches(){
-        for(index in matches){
+    if(!isGameOver && !isStaleMate){
+        // game isn't over
+        symbolTracker = !symbolTracker;
         
-            let match = matches[index];
+    }else{
+        // game is over
+        // if winner - congratulate winner
+        if(isGameOver == true){
+            let currSymbol = ((symbolTracker) ? "X" : "O");
+            alert("Winner! Congratulations Player " + currSymbol);
+        } 
 
-            let[first, second, third] = match;
-
-            let cell1 = document.getElementById(first).innerHTML;
-            let cell2 = document.getElementById(second).innerHTML;
-            let cell3 = document.getElementById(third).innerHTML;     
-            
-            if((cell1 != "") && (cell1 === cell2) && (cell1 === cell3)){
-                    isGameOver = true;
-                    break;
-            }
+        // if stalemate - announce stalemate
+        if(isStaleMate == true){
+            alert("Game Over! No winners");
         }
     }
+}
 
-    function checkStaleMate(){
+// function that cheks if the adjoining cells innerText contents to see if the symbols match
+function checkMatches(){
+    for(index in matches){
+    
+        let match = matches[index];
 
-        let staleMateFlag = true;
-        let gridItems = document.querySelectorAll(".cell");
+        let[first, second, third] = match;
 
-        gridItems.forEach((cell)=>{
-            if(cell.innerHTML == "Empty" || cell.innerHTML == ""){
-                staleMateFlag = false;
-            }
-        });
-
-        return staleMateFlag;
+        let cell1 = document.getElementById(first).innerHTML;
+        let cell2 = document.getElementById(second).innerHTML;
+        let cell3 = document.getElementById(third).innerHTML;     
+        
+        if((cell1 != "") && (cell1 === cell2) && (cell1 === cell3)){
+                isGameOver = true;
+                break;
+        }
     }
+}
 
-    function updatePlayerMsg() {
-        let playerDiv = document.getElementById("players-turn");
+function checkStaleMate(){
 
-        let currSymbol = ((symbolTracker) ? "X" : "O");
+    let staleMateFlag = true;
+    let gridItems = document.querySelectorAll(".cell");
 
-        playerDiv.innerHTML = "Player " + currSymbol + " turn.";
-    }
+    gridItems.forEach((cell)=>{
+        if(cell.innerHTML == "Empty" || cell.innerHTML == ""){
+            staleMateFlag = false;
+        }
+    });
+
+    return staleMateFlag;
+}
+
+function updatePlayerMsg() {
+    let playerDiv = document.getElementById("players-turn");
+
+    let currSymbol = ((symbolTracker) ? "X" : "O");
+
+    playerDiv.innerHTML = "Player " + currSymbol + " turn.";
+}

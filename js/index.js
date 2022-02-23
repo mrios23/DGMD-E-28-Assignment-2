@@ -71,12 +71,12 @@ window.onload = function() {
     });
 }
 
-// UTILITY FUNCTIONS - supports methods called within window.onload
 
-// function to mark cell with X or 0
+/*** UTILITY FUNCTIONS - supports methods called within window.onload ***/
+
+// Function to mark cell with symbol
 function markCell(cell) {
-
-    // Check that the game isn't over & the cell isn't already occupied
+    // Check that the game isn't over & if the cell isn't occupied mark cell
     if(cell.innerHTML == "" && isGameOver != true){
         hideMsg();
         cell.innerHTML = getCurrSymbol();
@@ -85,11 +85,11 @@ function markCell(cell) {
         displayMsg("Please pick another box or reset the game!")
     }
 
-    // after marking check if game is over
+    // After marking check if game is over
     checkGameStatus();
 }
 
-// function to check if game is over
+// Function to check if game is over
 function checkGameStatus(){
     // check for winner
     checkMatches();
@@ -110,13 +110,16 @@ function checkGameStatus(){
     }
 }
 
-// function that checks if the adjoining cells innerText contents to see if the symbols match
+/*  REQUIREMENT: 
+    This section of code is one that I am most proud of as I successfully used the concept of 
+    destructing an array, which I had not learned before this course.
+    */
+// Function that checks if their are any matches  
 function checkMatches(){
     for(index in matches){
     
         let match = matches[index];
-
-        let[first, second, third] = match;
+        let [first, second, third] = match;
 
         let cell1 = document.getElementById(first).innerHTML;
         let cell2 = document.getElementById(second).innerHTML;
@@ -130,13 +133,13 @@ function checkMatches(){
     }
 }
 
+// Function to check for stalemate in game
 function checkStaleMate(){
-
     let staleMateFlag = true;
     let gridItems = document.querySelectorAll(".cell");
 
     gridItems.forEach((cell)=>{
-        if(cell.innerHTML == "Empty" || cell.innerHTML == ""){
+        if(cell.innerHTML == ""){
             staleMateFlag = false;
         }
     });
@@ -144,21 +147,28 @@ function checkStaleMate(){
     return staleMateFlag;
 }
 
+// Function to display message for the players turn
 function updatePlayerMsg() {
     let playerDiv = document.getElementById("players-turn");
     playerDiv.innerHTML = "Player " + getCurrSymbol() + " turn.";
 }
 
+
+// Function to return the current symbol in the game play
 function getCurrSymbol(){
     return (symbolTracker) ? "X" : "O";
 }
 
+
+// Function to display additional messages for game
 function displayMsg(message){
     let msg = document.getElementById("message");
     msg.innerHTML = message;
     msg.style.visibility = "visible";
 }
 
+
+// Function to hide additional messages for during the game
 function hideMsg(){
     let msg = document.getElementById("message");
     msg.style.visibility = "hidden";

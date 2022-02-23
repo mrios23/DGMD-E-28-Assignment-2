@@ -26,6 +26,20 @@ body {
     font-size: x-large;
 }
 
+#message{
+    visibility: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: red;
+    font-size: x-large;
+    border: 1px solid black;
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
 #play-game-btn{
     margin-bottom: 25px;
+}
+
+.container div{
+    margin:20px;
 }

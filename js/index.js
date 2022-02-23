@@ -66,6 +66,7 @@ window.onload = function() {
                 cell.innerHTML = "";
             });
             isGameOver = false;
+            hideMsg();
         }
     });
 }
@@ -77,10 +78,11 @@ function markCell(cell) {
 
     // Check that the game isn't over & the cell isn't already occupied
     if(cell.innerHTML == "" && isGameOver != true){
+        hideMsg();
         cell.innerHTML = getCurrSymbol();
         symbolTracker = !symbolTracker;
     }else{
-        alert("Please pick another box or reset the game!");
+        displayMsg("Please pick another box or reset the game!")
     }
 
     // after marking check if game is over
@@ -98,12 +100,12 @@ function checkGameStatus(){
     if(isGameOver || isStaleMate){
         // if winner - congratulate winner
         if(isGameOver == true){
-            alert("Winner! Congratulations Player " + winner);
+            displayMsg("Winner! Congratulations Player " + winner);
         } 
 
         // if stalemate - announce stalemate
         if(isStaleMate == true && isGameOver == false){
-            alert("Game Over! No winners");
+            displayMsg("Game Over! No winners");
         }
     }
 }
@@ -149,4 +151,15 @@ function updatePlayerMsg() {
 
 function getCurrSymbol(){
     return (symbolTracker) ? "X" : "O";
+}
+
+function displayMsg(message){
+    let msg = document.getElementById("message");
+    msg.innerHTML = message;
+    msg.style.visibility = "visible";
+}
+
+function hideMsg(){
+    let msg = document.getElementById("message");
+    msg.style.visibility = "hidden";
 }

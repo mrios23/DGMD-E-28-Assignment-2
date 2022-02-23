@@ -3,18 +3,17 @@ body {
 }
 
 .cell{
-    background-color: aquamarine;
+    background-color: rgb(204, 199, 199);
     width: 100px;
     height: 100px;
     border: 1px solid black;
-    
+    line-height: 100px;
 }
 
 #grid{
     display: inline-block;
     width: 400px;
     height: 400px;
-    align-items: center;
 }
 
 .col{

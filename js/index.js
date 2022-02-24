@@ -80,6 +80,7 @@ function markCell(cell) {
     if(cell.innerHTML == "" && isGameOver != true){
         hideMsg();
         cell.innerHTML = getCurrSymbol();
+        cell.style.color = (cell.innerHTML == "X") ? "#4D4DFF" : "#E0E722";
         symbolTracker = !symbolTracker;
     }else{
         displayMsg("Please pick another box or reset the game!")
@@ -150,7 +151,7 @@ function checkStaleMate(){
 // Function to display message for the players turn
 function updatePlayerMsg() {
     let playerDiv = document.getElementById("players-turn");
-    playerDiv.innerHTML = "Player " + getCurrSymbol() + " turn.";
+    playerDiv.innerHTML = "Player " + getCurrSymbol() + " turn!";
 }
 
 
